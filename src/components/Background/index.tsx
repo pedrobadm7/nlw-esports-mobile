@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   ImageBackground,
 } from 'react-native';
@@ -12,7 +10,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export function Background({children}: Props){
+export function Background({ children }: Props) {
   return (
     <ImageBackground source={backgroundImg} defaultSource={backgroundImg} style={styles.container}>
       {children}
