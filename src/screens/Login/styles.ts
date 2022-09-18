@@ -1,0 +1,82 @@
+import { StyleSheet } from 'react-native';
+import { THEME } from '../../theme';
+
+export const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+    padding: 20,
+    marginRight: 16,
+    alignItems: 'center',
+  },
+  title: {
+    color: THEME.COLORS.TEXT,
+    fontSize: THEME.FONT_SIZE.LG,
+    fontFamily: THEME.FONT_FAMILY.BLACK,
+    marginBottom: 16,
+  },
+  logo: {
+    width: 214,
+    height: 120,
+    marginTop: 74,
+    marginBottom: 48,
+  },
+  loginBox: {
+    width: 280,
+    backgroundColor: THEME.COLORS.BACKGROUND_800,
+    borderRadius: 8,
+    padding: 20,
+    marginRight: 16,
+    alignItems: 'center',
+  },
+  email: {
+    color: THEME.COLORS.CAPTION_300,
+    fontSize: THEME.FONT_SIZE.SM,
+    fontFamily: THEME.FONT_FAMILY.REGULAR,
+    marginBottom: 4,
+    alignSelf: 'flex-start',
+  },
+  password: {
+    color: THEME.COLORS.CAPTION_300,
+    fontSize: THEME.FONT_SIZE.SM,
+    fontFamily: THEME.FONT_FAMILY.REGULAR,
+    marginBottom: 4,
+    marginTop: 16,
+    alignSelf: 'flex-start',
+  },
+  emailInput: {
+    width: '100%',
+    borderRadius: 4,
+    color: THEME.COLORS.CAPTION_300,
+    backgroundColor: THEME.COLORS.SHAPE,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+  },
+  passwordInput: {
+    width: '100%',
+    borderRadius: 4,
+    color: THEME.COLORS.CAPTION_300,
+    backgroundColor: THEME.COLORS.SHAPE,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+  },
+  button: {
+    width: '100%',
+    height: 36,
+    borderRadius: 6,
+    backgroundColor: THEME.COLORS.PRIMARY,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  buttonTitle: {
+    color: THEME.COLORS.TEXT,
+    fontFamily: THEME.FONT_FAMILY.SEMI_BOLD,
+    fontSize: THEME.FONT_SIZE.SM,
+    marginLeft: 8,
+  },
+});
