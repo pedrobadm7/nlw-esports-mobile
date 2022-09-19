@@ -1,11 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
-
-import { RootStackFlow } from './app.routes';
+import { AppRoutes } from './app.routes';
 
 export function Routes() {
-  return (
-    <NavigationContainer>
-      <RootStackFlow />
-    </NavigationContainer>
-  )
+  return <AppRoutes />
 }

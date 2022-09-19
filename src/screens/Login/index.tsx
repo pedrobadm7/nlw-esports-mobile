@@ -6,9 +6,9 @@ import { styles } from './styles';
 import logoImg from '../../assets/logo-nlw-esports.png';
 import { THEME } from '../../theme';
 import { GameController } from 'phosphor-react-native';
-import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import { useAuthContext } from '../../context/AppGlobal';
+
+
 
 export function Login() {
   const [email, setEmail] = useState('')
@@ -16,20 +16,8 @@ export function Login() {
   const [isEmailFocused, setIsEmailFocused] = useState(false)
   const [isPasswordFocused, setIsPasswordFocused] = useState(false)
 
-  const navigation = useNavigation();
 
-  async function handleLogin() {
-    try {
-      const response = await axios.post('http://localhost:3333/login', {
-        email,
-        password,
-      });
-
-      const { accessToken, refreshToken } = response.data
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const { logIn } = useAuthContext();
 
   return (
     <Background>
@@ -71,7 +59,10 @@ export function Login() {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={handleLogin}
+            onPress={() => {
+              logIn(email, password)
+            }}
+            activeOpacity={0.5}
           >
             <GameController
               color={THEME.COLORS.TEXT}

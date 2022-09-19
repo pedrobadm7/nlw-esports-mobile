@@ -1,65 +1,36 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { Home } from '../screens/Home';
 import { Game } from '../screens/Game';
 import { Login } from '../screens/Login';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useAuthContext } from '../context/AppGlobal';
 
+const { Navigator, Screen } = createNativeStackNavigator();
 
-const RootStack = createNativeStackNavigator();
+export function AppRoutes() {
+  const { auth } = useAuthContext()
 
-const AuthStack = createNativeStackNavigator();
-
-const FeedStack = createNativeStackNavigator();
-
-const AuthStackFlow = () => {
   return (
-    <AuthStack.Navigator
+    <Navigator
       screenOptions={{
         headerShown: false
       }}
     >
-      <AuthStack.Screen
-        name='login'
-        component={Login}
-      />
-    </AuthStack.Navigator >
+      {auth.accessToken ?
+        <>
+          <Screen
+            name='home'
+            component={Home}
+          />
+          <Screen
+            name='game'
+            component={Game}
+          />
+        </>
+        :
+        <Screen
+          name='login'
+          component={Login}
+        />}
+    </Navigator>
   )
 }
-
-const FeedStackFlow = () => {
-  return (
-    <FeedStack.Navigator
-      screenOptions={{
-        headerShown: false
-      }}
-    >
-      <FeedStack.Screen
-        name='home'
-        component={Home}
-      />
-      <FeedStack.Screen
-        name='game'
-        component={Game}
-      />
-    </FeedStack.Navigator>
-  )
-}
-
-export const RootStackFlow = () => {
-  return (
-    <RootStack.Navigator screenOptions={{
-      headerShown: false
-    }}>
-      <RootStack.Screen
-        name='authFlow'
-        component={AuthStackFlow}
-      />
-      <RootStack.Screen
-        name='feedStackFlow'
-        component={FeedStackFlow}
-      />
-
-    </RootStack.Navigator>
-  )
-}
-

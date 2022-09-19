@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { StatusBar } from 'react-native';
+import { LogBox, StatusBar } from 'react-native';
 
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_900Black } from '@expo-google-fonts/inter';
 import { Subscription } from 'expo-modules-core'
@@ -8,10 +8,11 @@ import './src/services/notificationConfigs';
 import { getPushNotificationToken } from './src/services/getPushNotificationToken';
 import * as Notifications from 'expo-notifications';
 
-
 import { Background } from './src/components/Background';
 import { Loading } from './src/components/Loading';
 import { Routes } from './src/routes';
+import { AuthProvider } from './src/context/AppGlobal';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
 
@@ -48,14 +49,20 @@ export default function App() {
 
 
   return (
-    <Background>
-      <StatusBar
-        barStyle='light-content'
-        backgroundColor='transparent'
-        translucent
-      />
+    <NavigationContainer>
+      <AuthProvider>
+        <Background>
+          <StatusBar
+            barStyle='light-content'
+            backgroundColor='transparent'
+            translucent
+          />
 
-      {fontsLoaded ? <Routes /> : <Loading />}
-    </Background>
+          {fontsLoaded ? <Routes /> : <Loading />}
+        </Background>
+      </AuthProvider>
+    </NavigationContainer>
+
+
   );
 }

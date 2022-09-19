@@ -12,10 +12,14 @@ import { Heading } from '../../components/Heading';
 
 import { styles } from './styles';
 import { Background } from '../../components/Background';
+import axios from 'axios';
+import { useAuthContext } from '../../context/AppGlobal';
 
 export function Home() {
-
   const [games, setGames] = useState<GameCardProps[]>([]);
+  useEffect(() => console.log({ games }), [])
+
+  const { auth } = useAuthContext();
 
   const navigation = useNavigation();
 
@@ -24,7 +28,19 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetch('http://192.168.100.7:3333/games').then(response => response.json()).then(data => setGames(data))
+    async function getGames() {
+      try {
+        const response = await axios.get('http://192.168.100.7:3333/games', {
+          headers: {
+            'Authorization': `Bearer ${auth.accessToken}`
+          }
+        });
+        setGames(response.data);
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    getGames()
   }, [])
 
   return (
