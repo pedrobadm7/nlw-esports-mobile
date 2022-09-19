@@ -69,6 +69,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       accessToken: '',
       refreshToken: ''
     });
+    navigation.navigate('login')
   }
 
   return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 
-import { Image, FlatList } from 'react-native';
+import { Image, FlatList, TouchableOpacity } from 'react-native';
 
 import logoImg from '../../assets/logo-nlw-esports.png';
 import { GameCard, GameCardProps } from '../../components/GameCard';
@@ -14,12 +14,14 @@ import { styles } from './styles';
 import { Background } from '../../components/Background';
 import axios from 'axios';
 import { useAuthContext } from '../../context/AppGlobal';
+import { SignOut } from 'phosphor-react-native';
+import { THEME } from '../../theme';
 
 export function Home() {
   const [games, setGames] = useState<GameCardProps[]>([]);
   useEffect(() => console.log({ games }), [])
 
-  const { auth } = useAuthContext();
+  const { auth, logOut } = useAuthContext();
 
   const navigation = useNavigation();
 
@@ -46,6 +48,10 @@ export function Home() {
   return (
     <Background>
       <SafeAreaView style={styles.container}>
+        <TouchableOpacity onPress={logOut} activeOpacity={1} style={{ alignSelf: 'flex-end', marginRight: 14 }}>
+          <SignOut size={32} color={THEME.COLORS.TEXT} />
+        </TouchableOpacity>
+
         <Image source={logoImg} style={styles.logo} />
 
         <Heading

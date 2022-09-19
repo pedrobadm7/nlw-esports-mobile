@@ -27,13 +27,13 @@ interface Props extends TouchableOpacityProps {
 
 export function GameCard({ data, ...rest }: Props) {
   return (
-    <TouchableOpacity style={styles.container} {...rest}>
+    <TouchableOpacity style={styles.container} {...rest} activeOpacity={1}>
       <ImageBackground style={styles.bannerUrl} source={{ uri: data.bannerUrl }}>
         <LinearGradient colors={THEME.COLORS.FOOTER} style={styles.footer}>
           <Text style={styles.title}>{data.title}</Text>
           <Text style={styles.ads}>{data._count.ads} anúncios</Text>
         </LinearGradient>
       </ImageBackground>
-    </TouchableOpacity>
+    </TouchableOpacity >
   );
 }

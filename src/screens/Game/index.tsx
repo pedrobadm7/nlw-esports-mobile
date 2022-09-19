@@ -12,6 +12,8 @@ import { Heading } from '../../components/Heading';
 import { DuoCard, DuoCardProps } from '../../components/DuoCard';
 import { useEffect, useState } from 'react';
 import { DuoMatch } from '../../components/DuoMatch';
+import axios from 'axios';
+import { useAuthContext } from '../../context/AppGlobal';
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
@@ -19,6 +21,7 @@ export function Game() {
 
   const navigation = useNavigation();
   const route = useRoute();
+  const { auth } = useAuthContext();
   const game = route.params as GameParams;
 
   function handleGoBack() {
@@ -26,13 +29,34 @@ export function Game() {
   }
 
   async function getDiscordUser(adsId: string) {
-    fetch(`http://192.168.100.7:3333/ads/${adsId}/discord`)
-      .then(response => response.json())
-      .then(data => setDiscordDuoSelected(data.discord))
+    try {
+      const response = await axios.get(`http://192.168.100.7:3333/ads/${adsId}/discord`, {
+        headers: {
+          'Authorization': `Bearer ${auth.accessToken}`
+        }
+      })
+      setDiscordDuoSelected(response.data.discord)
+
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   useEffect(() => {
-    fetch(`http://192.168.100.7:3333/games/${game.id}/ads`).then(response => response.json()).then(data => setDuos(data))
+    const getData = async () => {
+      try {
+        const response = await axios.get(`http://192.168.100.7:3333/games/${game.id}/ads`, {
+          headers: {
+            'Authorization': `Bearer ${auth.accessToken}`
+          }
+        })
+        setDuos(response.data)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    getData();
   }, [])
 
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { LogBox, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_900Black } from '@expo-google-fonts/inter';
 import { Subscription } from 'expo-modules-core'
@@ -57,7 +57,6 @@ export default function App() {
             backgroundColor='transparent'
             translucent
           />
-
           {fontsLoaded ? <Routes /> : <Loading />}
         </Background>
       </AuthProvider>

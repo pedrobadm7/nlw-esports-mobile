@@ -62,7 +62,7 @@ export function Login() {
             onPress={() => {
               logIn(email, password)
             }}
-            activeOpacity={0.5}
+            activeOpacity={1}
           >
             <GameController
               color={THEME.COLORS.TEXT}
